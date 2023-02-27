@@ -15,5 +15,5 @@ describe('Suite de prueba e2e para el curso', () => {
             done();
         });
         console.log('B');
-    })
-})
+    });
+});
