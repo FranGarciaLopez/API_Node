@@ -26,17 +26,15 @@ describe('Suite de pruebas auth', () => {
                 done();
             });
     });
+    it('should return 200 and token for succesful login', (done) => {
         chai.request(app)
-        .post('/login')
-        .end((err, res) => {
-            chai.request(app)
-            .get('/team')
-            .set('Authorization', `JWT ${res.body.token}`)
+            .post('/auth/login')
+            .set('content-type', 'application/json')
+            .send({user: 'mastermind', password: '4321'})
             .end((err, res) => {
+
+                //Expect valid login
                 chai.assert.equal(res.statusCode, 200);
                 done();
             });
-        });
-        
     });
-});
