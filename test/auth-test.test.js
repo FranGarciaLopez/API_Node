@@ -1,19 +1,20 @@
 const chai = require('chai');
-const chaiHTTP = require('chai-http');
+const chaiHttp = require('chai-http');
 
-chai.use(chaiHTTP);
 
-const app = require('../app.js').app
+chai.use(chaiHttp);
 
-describe('Suite de prueba auth', () => {
+const app = require('../app').app;
+
+describe('Suite de pruebas auth', () => {
     it('should return 401 when no jwt token available', (done) => {
-        //Cuando la llamada no tiene correctamente la llave
+        // Cuando la llamada no tiene correctamente la llave
         chai.request(app)
-        .get('/team')
-        .end((err, res) => {
-            chai.assert.equal(res.statusCode, 401);
-            done();
-        });
+            .get('/teams')
+            .end((err, res) => {
+                chai.assert.equal(res.statusCode, 401);
+                done();
+            });
     });
     it('should return 200 when jwt token is valid', (done) => {
         //Cuando la llamada no tiene correctamente la llave
