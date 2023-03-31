@@ -26,6 +26,7 @@ describe('Suite de pruebas auth', () => {
                 done();
             });
     });
+
     it('should return 200 and token for succesful login', (done) => {
         chai.request(app)
             .post('/auth/login')
@@ -38,3 +39,23 @@ describe('Suite de pruebas auth', () => {
                 done();
             });
     });
+
+    it('should return 200 when jwt is valid', (done) => {
+        chai.request(app)
+            .post('/auth/login')
+            .set('content-type', 'application/json')
+            .send({user: 'mastermind', password: '4321'})
+            .end((err, res) => {
+                //Expect valid login
+                chai.assert.equal(res.statusCode, 200);
+                chai.request(app)
+                    .get('/teams')
+                    .set('Authorization', `JWT ${res.body.token}`)
+                    .end((err, res) => {
+
+                        chai.assert.equal(res.statusCode, 401);
+                        done();
+                    });
+            });
+    });
+});
