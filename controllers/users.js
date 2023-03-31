@@ -1,3 +1,7 @@
+const uuid = require('uuid')
+const crypto = require('../crypto.js');
+const teams = require('./teams.js');
+
 const userDatabase = {};
 // userId - password
 
@@ -34,3 +38,8 @@ const checkUserCredentials = (userName, password, done) => {
           }
 
 }
+
+exports.registerUser = registerUser;
+exports.checkUserCredentials = checkUserCredentials;
+exports.getUserIdFromUserName = getUserIdFromUserName;
+exports.getUser = getUser;
