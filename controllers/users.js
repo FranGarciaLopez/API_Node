@@ -1,3 +1,16 @@
+const userDatabase = {};
+// userId - password
+
+const registerUser = (userName, password) => {
+          let hashedPwd = crypto.hashPasswordSync(password);
+
+          let userId = uuid.v4();
+          userDatabase[userId] = {
+                    userName: userName,
+                    password: hashedPwd
+          }
+          teams.bootstrapTeam(userId);
+}
 const getUser = (userId) => {
           return userDatabase[userId];
 }
