@@ -8,3 +8,16 @@ const getUserIdFromUserName = (userName) => {
                     }
           }
 }
+
+const checkUserCredentials = (userName, password, done) => {
+          console.log('checking user credentials')
+
+          let user = getUserIdFromUserName(userName);
+          if(user) {
+                    console.log(user);
+                    crypto.comparePassword(password, user.password, done);
+          } else {
+                    done('Missing user');
+          }
+
+}
