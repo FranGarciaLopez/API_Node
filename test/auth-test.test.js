@@ -16,8 +16,16 @@ describe('Suite de pruebas auth', () => {
                 done();
             });
     });
-    it('should return 200 when jwt token is valid', (done) => {
-        //Cuando la llamada no tiene correctamente la llave
+
+    it('should return 400 when no data is provided', (done) => {
+        chai.request(app)
+            .post('/auth/login')
+            .end((err, res) => {
+                //Expect valid login
+                chai.assert.equal(res.statusCode, 400);
+                done();
+            });
+    });
         chai.request(app)
         .post('/login')
         .end((err, res) => {
